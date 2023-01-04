@@ -66,7 +66,7 @@ public class CustomerView implements Observer
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
     theBtCheck.addActionListener(                   // Call back code
-      e -> cont.doCheck( theInput.getText() ) );
+      e -> cont.doCheck( getTheInput().getText() ) );
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
@@ -78,9 +78,9 @@ public class CustomerView implements Observer
     theAction.setText( "" );                        //  Blank
     cp.add( theAction );                            //  Add to canvas
 
-    theInput.setBounds( 110, 50, 270, 40 );         // Product no area
-    theInput.setText("");                           // Blank
-    cp.add( theInput );                             //  Add to canvas
+    getTheInput().setBounds( 110, 50, 270, 40 );         // Product no area
+    getTheInput().setText("");                           // Blank
+    cp.add( getTheInput() );                             //  Add to canvas
     
     theSP.setBounds( 110, 100, 270, 160 );          // Scrolling pane
     theOutput.setText( "" );                        //  Blank
@@ -93,7 +93,7 @@ public class CustomerView implements Observer
     thePicture.clear();
     
     rootWindow.setVisible( true );                  // Make visible);
-    theInput.requestFocus();                        // Focus is here
+    getTheInput().requestFocus();                        // Focus is here
   }
 
    /**
@@ -125,7 +125,15 @@ public class CustomerView implements Observer
       thePicture.set( image );             // Display picture
     }
     theOutput.setText( model.getBasket().getDetails() );
-    theInput.requestFocus();               // Focus is here
+    getTheInput().requestFocus();               // Focus is here
   }
+
+/**
+ * @return the theInput
+ * Method used to reset the customer input field when clearing.
+ */
+public JTextField getTheInput() {
+	return theInput;
+}
 
 }
