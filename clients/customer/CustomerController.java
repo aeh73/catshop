@@ -36,6 +36,7 @@ public class CustomerController
   public void doClear()
   {
     model.doClear();
+    view.getTheInput().setText(" ");
   }
 
   
