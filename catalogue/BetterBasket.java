@@ -12,7 +12,6 @@ import java.util.Collections;
 public class BetterBasket extends Basket implements Serializable
 {
   private static final long serialVersionUID = 1L;
-  
-
+ 
   // You need to add code here
 }
