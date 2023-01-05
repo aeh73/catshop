@@ -1,4 +1,5 @@
 package clients;
+
 import clients.backDoor.BackDoorController;
 import clients.backDoor.BackDoorModel;
 import clients.backDoor.BackDoorView;
@@ -62,9 +63,44 @@ class Main
     if ( many ) 
       startDisplayGUI_MVC( mlf );
     startCollectionGUI_MVC( mlf );
+    startAdvertGUI_MVC();
+
   }
   
-  public void startCustomerGUI_MVC(MiddleFactory mlf )
+  public void startAdvertGUI_MVC() {
+	  /*JFrame window = new JFrame();
+	JPanel panel = new JPanel();
+	window.setSize(300, 400);
+	panel.setBorder(BorderFactory.createSoftBevelBorder(1));
+	panel.setLayout(new GridLayout(0,1));
+	
+	window.add(panel, BorderLayout.CENTER);
+	window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+	window.setTitle( "Advert Client MVC");
+	window.pack();
+	window.setVisible(true);*/
+	  
+    JFrame frame = new JFrame();//create new jframe
+	JPanel panel = new JPanel();//create ew jpanel
+	frame.setTitle("Advert");
+	frame.setSize(700,750);//setting size, needs to be automatic-update
+	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );//Exits app on close
+	//Sets the advert frame to be positioned on the bottom right corner of screen on launch
+	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+    Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
+    int x = (int) rect.getMaxX() - frame.getWidth();
+    int y = (int) rect.getMaxY() - frame.getHeight();
+    frame.setLocation(x, y);
+	frame.setVisible(true);
+	frame.add(panel, BorderLayout.CENTER);
+	panel.setBackground(Color.green);
+
+}
+
+
+
+public void startCustomerGUI_MVC(MiddleFactory mlf )
   {
     JFrame  window = new JFrame();
     window.setTitle( "Customer Client MVC");
