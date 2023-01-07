@@ -158,6 +158,54 @@ public class CashierModel extends Observable
     theBasket = null;
     setChanged(); notifyObservers(theAction); // Notify
   }
+  /*doRemove -  a method to remove a particular item from the basket and to re-add that item to stock
+   * it is essentially the reverse of the doBuy method*/  
+  public void doDelete() {
+	  String theAction = "";
+	  int    amount  = -1;                         //  & quantity
+	  try
+	  {
+	     if( theBasket == null ) {
+	    	theAction="Your basket is empty!!..";
+	  }else if ( theState != State.checked ){          // Not checked
+	         theAction = "Check if OK with customer first"; //  with customer        
+	     } else if(theBasket.checkProduct(theProduct)) {
+	       boolean stockBought =                   // Buy
+	         theStock.buyStock(                    //  however
+	         theProduct.getProductNum(),         //  may fail              
+	         theProduct.getQuantity() );         //
+	        if( stockBought )                      // Stock bought
+	        {                                       // T
+	          makeBasketIfReq();                    //  new Basket ?
+	          if(theBasket.delete(theProduct)) {
+	          theStock.addStock(theProduct.getProductNum(), theProduct.getQuantity()+1);
+	          theAction = "Removed " +            //    details
+	                  theProduct.getDescription() + "from your basket!..";  //
+	          }
+	         } else{                                // F
+	          theAction = "!!! Not in stock";       //  Now no stock
+	        }
+	      }else{
+	    	  theAction="Error in removal!..";
+	      }
+	    } catch( StockException e )
+	    {
+	      DEBUG.error( "%s\n%s", 
+	            "CashierModel.doRemove", e.getMessage() );
+	      theAction = e.getMessage();
+	    }
+	    theState = State.process;                   // All Done
+	    setChanged(); notifyObservers(theAction);
+  }                                      
+	         
+	    
+	   
+	    
+      
+	  
+		
+	
+  
 
   /**
    * ask for update of view callled at start of day

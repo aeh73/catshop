@@ -23,6 +23,7 @@ public class CashierView implements Observer
   private static final String CHECK  = "Check";
   private static final String BUY    = "Buy";
   private static final String BOUGHT = "Bought";
+  private static final String DELETE = "Delete";// To add the string for the button
 
   private final JLabel      theAction  = new JLabel();
   private final JTextField  theInput   = new JTextField();
@@ -31,6 +32,7 @@ public class CashierView implements Observer
   private final JButton     theBtCheck = new JButton( CHECK );
   private final JButton     theBtBuy   = new JButton( BUY );
   private final JButton     theBtBought= new JButton( BOUGHT );
+  private final JButton     theBtDelete= new JButton( DELETE );// addinbg button to view
 
   private StockReadWriter theStock     = null;
   private OrderProcessing theOrder     = null;
@@ -76,6 +78,13 @@ public class CashierView implements Observer
     theBtBought.addActionListener(                  // Call back code
       e -> cont.doBought() );
     cp.add( theBtBought );                          //  Add to canvas
+    
+    
+    //Creating the delete button i copied over the clear button code and adjusted accordingly
+    theBtDelete.setBounds( 16, 25+60*2, 80, 30 );   // Clear Button
+    theBtDelete.addActionListener(                  // Call back code
+      e -> cont.doDelete() );
+    cp.add( theBtDelete );                          //  Add to canvas
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
     theAction.setText( "" );                        // Blank
