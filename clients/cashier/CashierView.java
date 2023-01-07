@@ -58,25 +58,31 @@ public class CashierView implements Observer
     }
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
+    cp.setBackground(Color.DARK_GRAY);
+    theAction.setForeground(Color.WHITE);
     cp.setLayout(null);                             // No layout manager
     rootWindow.setSize( W, H );                     // Size of Window
     rootWindow.setLocation( x, y );
 
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
+    
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check Button
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText() ) );
+    theBtCheck.setBackground(Color.GREEN);
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtBuy.setBounds( 16, 25+60*1, 80, 40 );      // Buy button 
     theBtBuy.addActionListener(                     // Call back code
       e -> cont.doBuy() );
+    theBtBuy.setBackground(Color.GREEN);
     cp.add( theBtBuy );                             //  Add to canvas
 
     theBtBought.setBounds( 16, 25+60*3, 80, 40 );   // Clear Button
     theBtBought.addActionListener(                  // Call back code
       e -> cont.doBought() );
+    theBtBought.setBackground(Color.GREEN);
     cp.add( theBtBought );                          //  Add to canvas
     
     
@@ -84,6 +90,7 @@ public class CashierView implements Observer
     theBtDelete.setBounds( 16, 25+60*2, 80, 30 );   // Clear Button
     theBtDelete.addActionListener(                  // Call back code
       e -> cont.doDelete() );
+    theBtDelete.setBackground(Color.RED);
     cp.add( theBtDelete );                          //  Add to canvas
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area

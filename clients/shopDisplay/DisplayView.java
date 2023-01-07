@@ -40,6 +40,8 @@ public class DisplayView extends Canvas implements Observer
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
     cp.setLayout( new BorderLayout() );             // Border N E S W CENTER 
+    cp.setBackground(Color.DARK_GRAY);
+    
     rootWindow.setSize( W, H );                     // Size of Window  
     rootWindow.setLocation( x, y );                 // Position on screen
     rootWindow.add( this, BorderLayout.CENTER );    //  Add to rootwindow

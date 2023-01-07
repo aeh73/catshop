@@ -197,15 +197,6 @@ public class CashierModel extends Observable
 	    theState = State.process;                   // All Done
 	    setChanged(); notifyObservers(theAction);
   }                                      
-	         
-	    
-	   
-	    
-      
-	  
-		
-	
-  
 
   /**
    * ask for update of view callled at start of day

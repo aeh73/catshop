@@ -49,6 +49,8 @@ public class CollectView implements Observer
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
     cp.setLayout(null);                             // No layout manager
+    cp.setBackground(Color.DARK_GRAY);
+    theAction.setForeground(Color.WHITE);
     rootWindow.setSize( W, H );                     // Size of Window
     rootWindow.setLocation( x, y );
 
@@ -57,6 +59,7 @@ public class CollectView implements Observer
     theBtCollect.setBounds( 16, 25+60*0, 80, 40 );  // Check Button
     theBtCollect.addActionListener(                 // Call back code
       e -> cont.doCollect( theInput.getText()) );
+    theBtCollect.setBackground(Color.GREEN);
     cp.add( theBtCollect );                         //  Add to canvas
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
