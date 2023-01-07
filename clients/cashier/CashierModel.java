@@ -162,7 +162,7 @@ public class CashierModel extends Observable
    * it is essentially the reverse of the doBuy method*/  
   public void doDelete() {
 	  String theAction = "";
-	  int    amount  = -1;                         //  & quantity
+	  int    amount  = 2;                         //  & quantity
 	  try
 	  {
 	     if( theBasket == null ) {
@@ -177,10 +177,14 @@ public class CashierModel extends Observable
 	        if( stockBought )                      // Stock bought
 	        {                                       // T
 	          makeBasketIfReq();                    //  new Basket ?
-	          if(theBasket.delete(theProduct)) {
-	          theStock.addStock(theProduct.getProductNum(), theProduct.getQuantity()+1);
+	          if(theStock.exists(pn)) {
+	  	        Product pr = theStock.getDetails(pn);
+		        theProduct = pr;
+		        theProduct.setQuantity(amount);
+
+		        theStock.addStock(pn, amount);
 	          theAction = "Removed " +            //    details
-	                  theProduct.getDescription() + "from your basket!..";  //
+	                  theProduct.getDescription() + "from your basket & returned to stock!!";  //
 	          }
 	         } else{                                // F
 	          theAction = "!!! Not in stock";       //  Now no stock
@@ -191,21 +195,12 @@ public class CashierModel extends Observable
 	    } catch( StockException e )
 	    {
 	      DEBUG.error( "%s\n%s", 
-	            "CashierModel.doRemove", e.getMessage() );
+	            "CashierModel.doDelete", e.getMessage() );
 	      theAction = e.getMessage();
 	    }
 	    theState = State.process;                   // All Done
 	    setChanged(); notifyObservers(theAction);
   }                                      
-	         
-	    
-	   
-	    
-      
-	  
-		
-	
-  
 
   /**
    * ask for update of view callled at start of day

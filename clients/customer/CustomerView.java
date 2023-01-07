@@ -59,19 +59,24 @@ public class CustomerView implements Observer
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
     cp.setLayout(null);                             // No layout manager
+    cp.setBackground(Color.DARK_GRAY);
+    theAction.setForeground(Color.WHITE);
+    
     rootWindow.setSize( W, H );                     // Size of Window
     rootWindow.setLocation( x, y );
-
+    
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( getTheInput().getText() ) );
+    theBtCheck.setBackground(Color.GREEN);
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
+    theBtClear.setBackground(Color.RED);
     cp.add( theBtClear );                           //  Add to canvas
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
