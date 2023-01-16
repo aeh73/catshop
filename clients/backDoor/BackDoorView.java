@@ -64,7 +64,7 @@ public class BackDoorView implements Observer
     theBtQuery.setBounds( 16, 25+60*0, 80, 40 );    // Buy button 
     theBtQuery.addActionListener(                   // Call back code
       e -> cont.doQuery( theInput.getText() ) );
-    theBtQuery.setBackground(Color.GREEN);
+    theBtQuery.setBackground(Color.BLUE);
     cp.add( theBtQuery );                           //  Add to canvas
 
     theBtRStock.setBounds( 16, 25+60*1, 80, 40 );   // Check Button

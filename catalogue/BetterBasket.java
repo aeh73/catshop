@@ -17,15 +17,16 @@ public class BetterBasket extends Basket implements Serializable, Comparator<Pro
   @Override
   public boolean add(Product p1) {
 	  /*Improved code from 2019 lecture slides*/
-	  //Search existing products for matching record
+	  //loop through products to see if there is a match
 	  for (Product p2: this) {
+		  // checks if what we adding is already in basket
 		  if(p1.getProductNum().equals(p2.getProductNum())) {
-			  //Found - update quantity and return
+			  //if found update the quantity and return true
 			  p2.setQuantity(p2.getQuantity()+p1.getQuantity());
 			  return true;
 		  }
 	  }
-	  //not found - add new product, using the superclass method
+	  //else it was not found using the superclass method we add a new product
 	  super.add(p1);
 	  //To sort thelist we turn BetterBasket into a comparator object
 	  //and giv it a compare method toproducts
@@ -60,10 +61,13 @@ public class BetterBasket extends Basket implements Serializable, Comparator<Pro
 	}*/ 
   
 	public boolean delete(Product pr) {
-		
+		 //  loops through the size ofthe arraylist 
 		 for(int i=0;i<this.size();i++) {
+			  // checks if what we adding is already in basket
 			  if(this.get(i).getProductNum().equals(pr.getProductNum())) {
+				  //if found update the quantity and return true
 				  this.get(i).setQuantity(this.get(i).getQuantity()-pr.getQuantity());
+				  //if it was the last item then remove it from the basket
 				  if(this.get(i).getQuantity() < 1) {
 					  this.remove(i);
 					  return true;

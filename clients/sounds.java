@@ -14,36 +14,23 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
+/*sounds class with a play method which will take in a filename as a string parameter*/
 public class sounds {
 
 	public void play(String fileName) {
-		if(fileName!=null) {	
+		
+		if(fileName!=null) {						//aslong as the filename is not null
+			File file= new File(fileName+".wav");	//then create a newfile with the filename and ".wav" as an extension
 			try {
-				Player playmp3;
-				FileInputStream fis =new FileInputStream(fileName);
-				playmp3 = new Player(fis);
-				playmp3.play();
-			} catch (JavaLayerException | FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				AudioInputStream audio = AudioSystem.getAudioInputStream(file);	//obtains an Audioinputstream of the user defined format
+				Clip clip=AudioSystem.getClip();								//AudioSystem retreives the audio file and assigns it to clip
+				clip.open(audio);												//Open the clip and start the audio
+				clip.start();													
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+				System.out.println("ERROR");
+				e.printStackTrace();	
 			}
-			
-	
 		}
-//		if(fileName!=null) {
-//			File file= new File(fileName+".wav");
-//			try {
-//				AudioInputStream audio = AudioSystem.getAudioInputStream(file);
-//				Clip clip=AudioSystem.getClip();
-//				clip.open(audio);
-//				clip.start();
-//			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-//				System.out.println("ERROR");
-//				e.printStackTrace();
-//			
-//			}
-//		}
 	}
 }
 

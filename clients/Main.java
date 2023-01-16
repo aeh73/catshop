@@ -70,7 +70,7 @@ class Main
     startCollectionGUI_MVC( mlf );
     startAdvertGUI_MVC();
   	sounds sounds = new sounds();
-	sounds.play("cashregister");
+	sounds.play("error");
 	
     
   }

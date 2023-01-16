@@ -70,7 +70,7 @@ public class CashierView implements Observer
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check Button
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText() ) );
-    theBtCheck.setBackground(Color.GREEN);
+    theBtCheck.setBackground(Color.BLUE);
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtBuy.setBounds( 16, 25+60*1, 80, 40 );      // Buy button 
@@ -82,7 +82,7 @@ public class CashierView implements Observer
     theBtBought.setBounds( 16, 25+60*3, 80, 40 );   // Clear Button
     theBtBought.addActionListener(                  // Call back code
       e -> cont.doBought() );
-    theBtBought.setBackground(Color.GREEN);
+    theBtBought.setBackground(Color.YELLOW);
     cp.add( theBtBought );                          //  Add to canvas
     
     
