@@ -16,7 +16,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 /*sounds class with a play method which will take in a filename as a string parameter*/
 public class sounds {
-
+	
 	public void play(String fileName) {
 		
 		if(fileName!=null) {						//aslong as the filename is not null

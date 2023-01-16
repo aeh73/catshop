@@ -1,5 +1,6 @@
 package clients.cashier;
 
+import clients.sounds;
 
 /**
  * The Cashier Controller
@@ -37,6 +38,7 @@ public class CashierController
   public void doBuy()
   {
     model.doBuy();
+
   }
   
    /**

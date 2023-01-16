@@ -52,6 +52,8 @@ class Main
    */
   public void begin()
   {
+	sounds sounds = new sounds();
+	sounds.play("starup");
     //DEBUG.set(true); /* Lots of debug info */
     MiddleFactory mlf = new LocalMiddleFactory();  // Direct access
  
@@ -69,8 +71,7 @@ class Main
       startDisplayGUI_MVC( mlf );
     startCollectionGUI_MVC( mlf );
     startAdvertGUI_MVC();
-  	sounds sounds = new sounds();
-	sounds.play("error");
+  	
 	
     
   }
