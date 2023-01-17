@@ -6,7 +6,7 @@ public class CaesarCipher {
 			'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
 			'Q','R','S','T','U','V','W','X','Y','Z'
 	};
-	protected char[] encrypt = new char[ALPHASIZE];//Encryption Array
+	protected static char[] encrypt = new char[ALPHASIZE];//Encryption Array
 	protected char[] decrypt = new char[ALPHASIZE];//DECRYPTION ARRAY
 	
 	/*Constructor to initialise the arrays*/
@@ -19,7 +19,7 @@ public class CaesarCipher {
 	}
 	
 	/*Encryption Method*/
-	public String encrypt(String secret) {
+	public static String encrypt(String secret) {
 		char[] mess = secret.toCharArray();//the message array
 		for(int i = 0;i<mess.length;i++)//encryption loop
 			if(Character.isUpperCase(mess[i]))//we have a letter to change

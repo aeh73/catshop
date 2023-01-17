@@ -1,0 +1,7 @@
+Order number: 002
+0005   Digital Camera (  1) £  89.99
+----------------------------
+Total                       £  89.99
+Total with 
+promotional code            £  80.99
+
