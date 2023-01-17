@@ -2,10 +2,26 @@ package clients.cashier;
 
 import catalogue.Basket;
 import catalogue.Product;
+import clients.CaesarCipher;
 import debug.DEBUG;
 import middle.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Observable;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.swing.JOptionPane;
 
 /**
  * Implements the Model of the cashier client
@@ -136,6 +152,29 @@ public class CashierModel extends Observable
    */
   public void doBought()
   {
+try {
+	DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");  //Will formate the date the way you like
+	LocalDateTime now = LocalDateTime.now();										//Retreives the date from local computer
+	//Create a new file object with a custom name which will have their order number followed by the date
+	//and the .txt file extension
+	File file = new File(theBasket.getOrderNum()+"["+customFormatter.format(now)+"]"+".txt");
+	file.createNewFile();			
+	//Once file is created we need to write the details, first we create a filewriter object which takes the file as a parameter
+	//seems strange to use 3 different writer classes but it will not run without them
+	FileWriter fw = new FileWriter(file, true);
+	BufferedWriter bw = new BufferedWriter(fw);// the buffered writer object then takes the filewriter object as a parameter
+	PrintWriter pw = new PrintWriter(fw);	   // and then the printwriter object takes the filewriter object as a parameter too
+	pw.println(theBasket.getDetails());		   //finally we print the basket details using the getDetails method and close
+	pw.close();
+	
+	
+} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
     String theAction = "";
     int    amount  = 1;                       //  & quantity
     try
@@ -156,52 +195,43 @@ public class CashierModel extends Observable
       theAction = e.getMessage();
     }
     theBasket = null;
+    
     setChanged(); notifyObservers(theAction); // Notify
+	String promo= JOptionPane.showInputDialog ("Check customer has promo code?");
+	if(promo.equals("promo")) {
+		JOptionPane.showMessageDialog(null, "Congratulations!! Customer is entitled to 10% off!!");
+	}else {
+		JOptionPane.showMessageDialog(null, "Sorry!! Customer is NOT entitled to 10% off!!");
+	}
   }
   /*doRemove -  a method to remove a particular item from the basket and to re-add that item to stock
-   * it is essentially the reverse of the doBuy method*/  
-  public void doDelete() {
+   * it is essentially the reverse of the doBuy and doBought methods*/  
+  public void doRemove() {
 	  String theAction = "";
-	  int    amount  = 2;                         //  & quantity
 	  try
-	  {
-	     if( theBasket == null ) {
-	    	theAction="Your basket is empty!!..";
-	  }else if ( theState != State.checked ){          // Not checked
-	         theAction = "Check if OK with customer first"; //  with customer        
-	     } else if(theBasket.checkProduct(theProduct)) {
-	       boolean stockBought =                   // Buy
-	         theStock.buyStock(                    //  however
-	         theProduct.getProductNum(),         //  may fail              
-	         theProduct.getQuantity() );         //
-	        if( stockBought )                      // Stock bought
-	        {                                       // T
-	          makeBasketIfReq();                    //  new Basket ?
-	          if(theStock.exists(pn)) {
-	  	        Product pr = theStock.getDetails(pn);
-		        theProduct = pr;
-		        theProduct.setQuantity(amount);
-
-		        theStock.addStock(pn, amount);
-	          theAction = "Removed " +            //    details
-	                  theProduct.getDescription() + "from your basket & returned to stock!!";  //
-	          }
-	         } else{                                // F
-	          theAction = "!!! Not in stock";       //  Now no stock
-	        }
-	      }else{
-	    	  theAction="Error in removal!..";
+	    {
+	      if ( theBasket.isEmpty() )          // check basket
+	      {                                         //  
+	        theAction = "Your basket is empty!!..";
+	      }else if ( theState != State.checked )       // check 
+		      {                                         //  with customer
+		        theAction = "Check if OK with customer first";
+		      } else {
+	        Product prod =  theBasket.remove();                 // call remove on the product in basket
+	        theStock.addStock( prod.getProductNum(), 1); // re-add product to stock
+	        theAction = "Removed " +            //    print action
+	                prod.getDescription();  //
 	      }
 	    } catch( StockException e )
 	    {
-	      DEBUG.error( "%s\n%s", 
-	            "CashierModel.doDelete", e.getMessage() );
+	      DEBUG.error( "%s\n%s",
+	              "CashierModel.doBuy", e.getMessage() );
 	      theAction = e.getMessage();
 	    }
 	    theState = State.process;                   // All Done
 	    setChanged(); notifyObservers(theAction);
   }                                      
-
+ 
   /**
    * ask for update of view callled at start of day
    * or after system reset

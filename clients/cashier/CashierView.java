@@ -89,7 +89,7 @@ public class CashierView implements Observer
     //Creating the delete button i copied over the clear button code and adjusted accordingly
     theBtDelete.setBounds( 16, 25+60*2, 80, 30 );   // Clear Button
     theBtDelete.addActionListener(                  // Call back code
-      e -> cont.doDelete() );
+      e -> cont.doRemove() );
     theBtDelete.setBackground(Color.RED);
     cp.add( theBtDelete );                          //  Add to canvas
 

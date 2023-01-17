@@ -65,6 +65,12 @@ public class Basket extends ArrayList<Product> implements Serializable
   {                              
     return super.remove( pr );     // Call remove in ArrayList
   }
+  public Product remove()
+  {
+    int item = super.size() - 1;
+    Product prod = super.remove(item);     // Call remove in ArrayList
+    return prod;
+  }
 
   /**
    * Returns a description of the products in the basket suitable for printing.
@@ -94,12 +100,35 @@ public class Basket extends ArrayList<Product> implements Serializable
       }
       fr.format("----------------------------\n");
       fr.format("Total                       ");
-      fr.format("%s%7.2f\n",    csign, total );
+      fr.format("%s%7.2f\n",    csign, getTotal());
+      fr.format("Total with \npromotional code            ");
+      fr.format("%s%7.2f\n",    csign, getPromo());
       fr.close();
     }
     return sb.toString();
   }
-
+  
+  /*Method that loops through theBasket arraylist and multiplies each price by their quantity and keeps a running total*/
+  public double getTotal()
+  {
+      double total = 0.0;
+	  for ( Product pr: this )
+      {
+        total += pr.getPrice() * pr.getQuantity();
+      }    
+	  return total;
+  }
+  
+  /*Method to generate discount, as default  its 10% off with a promotional code*/
+  public double getPromo()
+  {
+	  return (getTotal() / 100)*90 ;
+  }
+  
+  
+  
+  
+  
 public boolean checkProduct(Product pr) {
 	for(int i=0;i<this.size();i++) {
 		if(this.get(i).getProductNum().equals(pr.getProductNum())) {
